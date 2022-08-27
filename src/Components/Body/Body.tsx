@@ -103,7 +103,6 @@ private setCategories(categories: Cat[]){
     this.setState(Object.assign(this.state, {
         categories: cats
     }));
-    console.log(this.state.categories);
 }
 
 private setCategory(category: Category) {
@@ -153,39 +152,19 @@ private setData(dataToSave: Data[]){
         })));
 }
 
- componentWillMount(){
+ async componentWillMount(){
 
-    this.fetchCategories();
+    await this.fetchCategories();
 
-    let id: number = 1;
+    await this.fetchCategory();
 
-    this.state.categories.map((cat: Cat) => {
-        if(cat.current){
-            id = cat.categoryId;
-        }
-    })
-
-    fetch(
-        "api/category/" + id, "get", {}
-    ).then((res: ApiResponse) => {
-
-        if(res.status === 'login' || res.status === 'error'){
-
-            return this.setLogginState(false);
-          }
-
-          this.setCategory(res.data);
-
-    }).catch(err => {
-        console.log(err);
-    });
   }
 
-  private fetchCategory(){
+  private async fetchCategory(){
 
-    let id: number = 1;
+    let id: number = this.state.categories[0].categoryId;
 
-    this.state.categories.map((cat: Cat) => {
+    await this.state.categories.map((cat: Cat) => {
         if(cat.current){
             id = cat.categoryId
         }
@@ -210,8 +189,8 @@ private setData(dataToSave: Data[]){
         
   }
 
-  private fetchCategories() {
-    fetch(
+  private async fetchCategories() {
+    await fetch(
         "api/category/", "get", {}
     ).then((res: ApiResponse) => {
 
@@ -262,8 +241,7 @@ private setData(dataToSave: Data[]){
     this.setState(Object.assign(this.state, {
         addModalVisible: state
     }))
-      console.log(state);
-      console.log(this.state.addModalVisible);
+
   }
 
  render(){
@@ -280,7 +258,7 @@ private setData(dataToSave: Data[]){
    <Container>
        <Filter className='bg-light' id="filter">
             <Labela for="state">Kategorija: </Labela>
-            <Selectt id="state" aria-label="State" size="sm" onChange={(e: any) => this.selectChange(e as any)}>
+            <Selectt id="state" name="state" aria-label="State" size="sm" onChange={(e: any) => this.selectChange(e as any)}>
 
                 {this.state.categories.map((cat: Cat) => {
                     return(

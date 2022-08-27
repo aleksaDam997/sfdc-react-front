@@ -1,7 +1,4 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { stringify } from 'querystring';
-import { Router } from 'react-router-dom';
-import { callbackify } from 'util';
 import { ApiConfig } from '../Config/ApiConfig';
 
 
