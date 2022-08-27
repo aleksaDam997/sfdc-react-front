@@ -1,0 +1,69 @@
+.con-login{
+    float: none;
+    margin-top: 15px;
+    color: white;
+    
+}
+.bcg-image {
+    min-height: 400px;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../../../public/login_bg2_new.jpg");
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.text-label{
+    font-weight: 500;
+    color: #FFFFFF;
+    text-shadow: -1px 1px 0 rgb(152, 150, 150),
+                          1px 1px 0 rgb(152, 150, 150),
+                         1px -1px 0 rgb(152, 150, 150),
+                        -1px -1px 0 rgb(152, 150, 150);
+}
+.under{
+    font-weight: 700;
+    color: #000000;
+    
+    
+}
+/* #2f34d8 */
+.miniheader{
+    margin: 0;
+    padding: 30px;
+    text-shadow: -1px 1px 0 rgb(152, 150, 150),
+                          1px 1px 0 rgb(152, 150, 150),
+                         1px -1px 0 rgb(152, 150, 150),
+                        -1px -1px 0 rgb(152, 150, 150);
+}
+.btn{
+    display: inline-block;
+    width: 100px;
+    margin-left: 20px;
+}
+
+h2{
+    margin: 0;
+    text-align: center;
+    color: white;
+}
+
+.truebody{ 
+    display: block;
+    float: none;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.message{
+   color: red; 
+}
+@media screen and (max-width: 426px) {
+    .btn{
+        display: inline-block;
+        width: 80px;
+        margin-left: auto;
+        margin-right: auto ;
+    }
+  }
+

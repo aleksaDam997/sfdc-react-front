@@ -4,6 +4,7 @@ import { Navigate  } from 'react-router-dom';
 import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
 import styled from 'styled-components';
 import { ApiResponse, fetch } from '../../api/api';
+// import "./Body.css";
 
 interface IProps {}
 

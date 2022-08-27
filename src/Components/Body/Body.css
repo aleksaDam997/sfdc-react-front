@@ -1,0 +1,70 @@
+const Container = styled.div`
+display: block;
+float: none;
+width: 80vw;
+margin: 0 auto;
+height: calc(100vh - 200px);
+border-top: 2px solid white;
+border-bottom: 2px solid white;
+
+background-color: rgba(0, 0, 0, 0.02);
+overflow-y: hidden;
+`;
+
+const AdaptedTable = styled(Table)`
+   height: calc(100vh - 310px);
+   cursor: pointer;
+
+   tbody {
+       display: block;
+       overflow: auto;
+       height: calc(100vh - 230px);
+       border-bottom: 2px solid white;
+   }
+
+   thead, tbody tr {
+       display: table;
+       width: 100%;
+       table-layout: fixed;
+   }
+
+
+   th {
+       text-align: center;
+   }
+
+   td {
+       text-align: center;
+   }
+
+   
+
+`
+
+const Filter = styled.div`
+   height: 80px;
+   background-color: light;
+   display: flex;
+   padding: 10px;
+   padding-top: 15px;
+   justify-content: center;
+   align-items: center;
+   border-bottom: 2px solid white;
+
+`;
+
+const Labela = styled(Form.Label)`
+   margin-right: 10px;
+   font-size: 20px;
+`
+
+const Selectt = styled(Form.Select)`
+width: 200px;
+height 40px;
+`
+const Butt = styled(Button)`
+   margin-left: 20px;
+   margin-top: 7px;
+   height: 40px;
+
+`
