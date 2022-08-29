@@ -20,7 +20,7 @@ export function login(creditentials: {username: string; password: string}) {
         }
       }
       
-      axios.post("http://localhost:8080/api/login", params, config)
+      axios.post("http://apps.sf.ues.rs.ba:8080/app/api/login", params, config)
         .then((res) => {
 
           console.log(res);
