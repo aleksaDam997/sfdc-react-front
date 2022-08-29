@@ -74,8 +74,11 @@ export class Body extends Component<IProps> {
          apexOptions: {
             chart: {
                 height: 350,
-                type: 'bar',
+                type: 'line',
             },
+            xaxis: {
+                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+              },
             dataLabels: {
                 enabled: false
             },
@@ -228,31 +231,47 @@ private setData(dataToSave: Data[]){
   }
 
   private updateChart() {
-    // var chart = new ApexCharts(
-    //     document.getElementById('chart'),
-    //     this.state.apexOptions
-    //   );
+
+    const data1: number[] = [];
+    const data2: number[] = [];
+    const data1Xaxis: string[] = [];
+
+
+    this.state.category?.data.map(dat => {
+      data1.push(dat.value1);
+      data2.push(dat.value2);
+
+      data1Xaxis.push(new Date(dat.createdAt).getFullYear() + " - " + new Date(dat.createdAt).getMonth());
+    // data1Xaxis.push(new Date(dat.createdAt).getFullYear());
+    })
+
+    this.setState(Object.assign(this.state, Object.assign(
+      this.state.apexOptions, Object.assign(this.state.apexOptions.xaxis, {
+        categories: data1Xaxis
+      })
+    )))
 
       var chart = new ApexCharts(
-        document.querySelector("#chart"),
+        document.getElementById("chart"),
         this.state.apexOptions
       );
 
       chart.render();
 
-      const data1: number[] = [];
-      const data2: number[] = [];
 
-      this.state.category?.data.map(dat => {
-        data1.push(dat.value1);
-        data2.push(dat.value2);
-      })
 
       chart.updateSeries([{
         name: this.state.category?.value1,
         data: data1
       }])
 
+    //   series: [{
+    //     name: 'Football'
+    //     data: [33, 23, 76, 33]
+    //   }, {
+    //     name: 'Cricket'
+    //     data: [23, 33, 16, 23]
+    //   }]
 
 
       
@@ -436,6 +455,7 @@ private setData(dataToSave: Data[]){
                   </Modal.Title>
             </Modal.Header>
             <Modal.Body className="d-flex justify-content-center">
+                <div className='mixed-chart w-100 h-100'>
                 <Chart id="chart"
                     options={this.state.apexOptions}
                     series={this.state.apexOptions.series}
@@ -443,6 +463,7 @@ private setData(dataToSave: Data[]){
                     width="500"
 
                 />
+                </div>
             </Modal.Body>
             <Modal.Footer>
                 <Button onClick={() => this.updateChart()}>
