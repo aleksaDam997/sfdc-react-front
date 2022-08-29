@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import styled from 'styled-components';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Container, Row, Col  } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as api from '../../api/api';
 import { ApiResponse } from '../../api/api';
 import {Navigate} from 'react-router-dom';
+import "./LoginPage.css";
 
 interface IProps {}
 
@@ -112,84 +113,42 @@ private doLogin() {
   }
 
   return( 
-   <Container>
-     <MiniHeader>
-       <h2>
+   <Container className='con-login'>
+    <div className='bcg-image'>
+      <div className='forma'>
+       <h2 className='miniheader'>
          Aplikacija za akviziciju podataka sa arduino senzora
        </h2>
-     </MiniHeader>
-     <TrueBody>
-      <Form>
+      <Form className='truebody'>
+        <Row>
         <Form.Group className="mb-3" controlId="formBasicLogin">
-          <Form.Label htmlFor="username">Username</Form.Label>
+          <Form.Label className='text-label' htmlFor="username">Username</Form.Label>
           <Form.Control id="username" type="text" placeholder="Enter username" value={this.state.username} onChange={(event: any) => this.formInputChanged(event)}/>
-          <Form.Text className="text-muted">
+          <Form.Text className="under">
             We'll never share your email with anyone else.
           </Form.Text>
         </Form.Group>
-
+        </Row>
+        <Row>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label htmlFor="password">Password</Form.Label>
+          <Form.Label className='text-label' htmlFor="password">Password</Form.Label>
           <Form.Control id="password" value={this.state.password} type="password" placeholder="Password"  onChange={(event: any) => this.formInputChanged(event)}/>
         </Form.Group>
-        <Button id="login-button" className="btn btn-block" variant="primary" type="submit" onClick={() => this.doLogin()}>
+        <Button id="login-button" className="btn" variant="primary" type="submit" onClick={() => this.doLogin()}>
           Login
         </Button>
-        <Message className='bg-danger'>
+        </Row>
+        <div className='bg-danger message'>
           <h1>
             {this.state.message}
           </h1>
-        </Message>
-        
+        </div>
       </Form>
-    </TrueBody>
+      </div>
+      </div>
    </Container>
     )
    }
 
  }
 
- const Container = styled.div`
- display: block;
- float: none;
- width: 80vw;
- margin: 0 auto;
- height: calc(100vh - 200px);
- color: white;
-
- background-position: center;
- background-repeat: no-repeat;
- /*background-attachment: fixed;*/
- background-size: cover;
- background-image: url("./login_bg2.jpg");
-// background-color: rgba(0, 0, 0, 0.2);
-
-
- //#2f34d8
-
-
-`;
-
-const MiniHeader = styled.div`
-  margin: 0;
-  padding: 30px;
-
-  h2 {
-    margin: 0;
-    text-align: center;
-    color: white;
-  }
-`;
-
-const TrueBody = styled.div`
-
-display: block;
-float: none;
-width: 60%;
-margin: 0 auto;
-
-`;
-
-const Message = styled.div`
-
-`;

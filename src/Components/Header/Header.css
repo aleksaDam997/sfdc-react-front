@@ -1,0 +1,45 @@
+
+.container-header {
+  background-color: rgb(22, 28, 45);
+  overflow: hidden;
+}
+
+.header-col {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   }
+a{
+   text-decoration: none;
+   padding: 0;
+   margin: 0;
+}
+.header-img {
+   width: 90px;
+   height: 90px;
+   border-radius: 50%;
+   margin: 0;
+   }
+
+.center {
+   padding: auto;
+   justify-content: center;
+   align-items: center;
+   }
+
+.fax {
+   text-align: center;
+   font-size: 22px;
+   -webkit-text-stroke: 1px #383d52;
+   text-transform: uppercase;
+   color: firebrick;
+   }
+   @media screen and (max-width: 426px) {
+      .fax {
+         font-size: 17px;
+         }
+         .header-img {
+            width: 55px;
+            height: 55px;
+            }
+    }

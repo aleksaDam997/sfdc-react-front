@@ -1,0 +1,43 @@
+
+.footer-con{
+  margin-top: 20px;
+  color: black;
+}
+
+h6 {
+  text-align: center;
+  font-weight: bold;
+}
+
+iframe {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+} 
+.row-footer{
+  margin-bottom: 10px;
+}
+
+.link {
+  display: block;
+  text-decoration: none;
+  color: blue;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+p {
+  text-align: center;
+} 
+@media screen and (max-width: 426px) {
+  p{
+    margin-bottom: 0%;
+  }
+  .link {
+    margin-bottom: 0%;
+  }
+  h6 {
+    margin: 10px auto;
+  }
+}

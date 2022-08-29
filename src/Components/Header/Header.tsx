@@ -2,7 +2,10 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import React, { Component } from 'react'
-import styled from 'styled-components';
+// import styled from 'styled-components';
+import {Link} from "react-router-dom";
+import { Container, Row, Col } from 'react-bootstrap';
+import "./Header.css";
 
 interface IProps {}
 
@@ -17,97 +20,26 @@ export class Header extends Component<IProps> {
 
  render(){
   return(
-   <Container className="bg-light">
-      <LeftSide>
-         <img src="./logo-uis.gif" alt="UIS logo" />
-      </LeftSide>
-      <Center>
-         <h2>
-         Универзитет у Источном Сарајеву <br />
-       Саобраћајни факултет <br />
-       Добој
-         </h2>
-      </Center>
-      <RightSide> 
-         <img src="./logoSF.png" alt="SF Doboj logo" />
-      </RightSide>
+   <Container className="bg-light container-header">
+      <Row>
+         <Col  className='header-col'>
+               <a target="_blank" href="https://www.ues.rs.ba/"><img className='header-img' src="./logo-uis.gif" alt="UIS logo" /></a>
+         </Col>
+         <Col>
+               <h2 className='fax'>
+                  Универзитет у Источном Сарајеву <br />
+                  Саобраћајни факултет <br />
+                  Добој
+               </h2>
+         </Col>
+         <Col className='header-col'>
+               <a target="_blank" href='http://sf.ues.rs.ba/'><img className='header-img' src="./logoSF.png" alt="SF Doboj logo" /></a>
+         </Col>
+      </Row>
    </Container>
     )
    }
  }
 
 
- const Container = styled.div`
-  height: 120px;
-  display: flex;
-  z-index: -1;
-  background-color: rgb(22, 28, 45);
-  overflow: hidden;
- `;
-
- const Fai = styled(FontAwesomeIcon)`
-  color: blue;
- `;
-
- const LeftSide = styled.div`
-    flex-grow: 2.5;
-    display: flex;
-    justify-content: left;
-    margin-left: 80px;
-    align-items: center;
-
-    @media (max-width: 786px) {
-      margin-left: 20px;
-   }
-
-    img {
-       display: inline-block;
-       width: 80px;
-       height: 80px;
-       border-radius: 50%;
-    }
-
-
- `;
-
- const Center = styled.div`
-    flex-grow: 5;
-    padding: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    h2 {
-      text-align: center;
-      font-size: 26px;
-      // -webkit-text-stroke: 1px #383d52;
-      text-transform: uppercase;
-      color: firebrick;
-
-      :hover {
-         transform: scaleX(1.2);
-         transform: scaleY(1.2);
-
-         transition: transform 0.5s ease-in;
-      }
-    }
- `;
-
- const RightSide = styled.div`
- flex-grow: 2.5;
- display: flex;
- margin-right: 80px;
- justify-content: right;
- align-items: center;
-
- @media (max-width: 786px) {
-   margin-right: 20px;
-}
-
- img {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
- }
- `;
+ 
