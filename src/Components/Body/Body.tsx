@@ -1,5 +1,6 @@
 import React, { Component, ReactInstance } from 'react';
 import { Button, Form, Modal, Table, Container, Row, Col } from 'react-bootstrap';
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Navigate  } from 'react-router-dom';
 import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
 import Chart from 'react-apexcharts'
@@ -345,9 +346,8 @@ private setData(dataToSave: Data[]){
 
   return(
    <Container className='con-body'>
-       <div className='bg-light'>
+        <Row className='select-width d-flex justify-content-center'>
             <Form.Label htmlFor='state'>Kategorija: </Form.Label>
-            <Row className='select-width'>
             <Form.Select id="state" className='select-form' name="state" aria-label="State"  
             onChange={(e: any) => this.selectChange(e as any)}>
 
@@ -368,9 +368,8 @@ private setData(dataToSave: Data[]){
               Printaj
             </Button>}
             content={() => this.state.componentRef}/>
-             <Button onClick={() => this.setChartVisibile(true)}>Graff..</Button>
-            </Row>
-
+             <Button variant="secondary" onClick={() => this.setChartVisibile(true)}>Graff..</Button>
+        </Row>
        <Table variant="light" striped bordered hover ref={el => (this.state.componentRef = el)} >
         <thead>
             <tr>
@@ -453,7 +452,6 @@ private setData(dataToSave: Data[]){
                 </Form.Group>
             </Modal.Body>
         </Modal>
-</div>
         <Modal size="lg" centered show={this.state.apexChartVisible} onHide={() => this.setChartVisibile(false)}>
             <Modal.Header closeButton>
                   <Modal.Title>
