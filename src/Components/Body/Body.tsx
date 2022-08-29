@@ -2,14 +2,11 @@ import React, { Component, ReactInstance } from 'react';
 import { Button, Form, Modal, Table, Container, Row, Col } from 'react-bootstrap';
 import { Navigate  } from 'react-router-dom';
 import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
-import styled from 'styled-components';
 import Chart from 'react-apexcharts'
 import { ApiResponse, fetch } from '../../api/api';
-<<<<<<< HEAD
 import "./Body.css";
-=======
 import { ApexOptions } from 'apexcharts';
->>>>>>> 81e48230c878e3a10440b2509839fb23e4948545
+
 
 interface IProps {}
 
@@ -347,20 +344,12 @@ private setData(dataToSave: Data[]){
 
 
   return(
-<<<<<<< HEAD
    <Container className='con-body'>
        <div className='bg-light'>
-
             <Form.Label htmlFor='state'>Kategorija: </Form.Label>
             <Row className='select-width'>
             <Form.Select id="state" className='select-form' name="state" aria-label="State"  
             onChange={(e: any) => this.selectChange(e as any)}>
-=======
-   <Container>
-       <Filter className='bg-light' id="filter">
-            <Labela for="state">Kategorija: </Labela>
-            <Selectt id="state" name="state" aria-label="state" size="sm" onChange={(e: any) => this.selectChange(e as any)}>
->>>>>>> 81e48230c878e3a10440b2509839fb23e4948545
 
                 {this.state.categories.map((cat: Cat) => {
                     return(
@@ -379,14 +368,10 @@ private setData(dataToSave: Data[]){
               Printaj
             </Button>}
             content={() => this.state.componentRef}/>
-<<<<<<< HEAD
+             <Button onClick={() => this.setChartVisibile(true)}>Graff..</Button>
             </Row>
-       <Table responsive="sm" variant="light" striped bordered hover ref={el => (this.state.componentRef = el)} >
-=======
-            <Butt onClick={() => this.setChartVisibile(true)}>Graff..</Butt>
-       </Filter>
-       <AdaptedTable variant="light" striped bordered hover ref={el => (this.state.componentRef = el)} >
->>>>>>> 81e48230c878e3a10440b2509839fb23e4948545
+
+       <Table variant="light" striped bordered hover ref={el => (this.state.componentRef = el)} >
         <thead>
             <tr>
                 <th className='data-id'>Podatak id</th>
@@ -468,9 +453,7 @@ private setData(dataToSave: Data[]){
                 </Form.Group>
             </Modal.Body>
         </Modal>
-<<<<<<< HEAD
 </div>
-=======
         <Modal size="lg" centered show={this.state.apexChartVisible} onHide={() => this.setChartVisibile(false)}>
             <Modal.Header closeButton>
                   <Modal.Title>
@@ -495,7 +478,6 @@ private setData(dataToSave: Data[]){
             </Modal.Footer>
         </Modal>
 
->>>>>>> 81e48230c878e3a10440b2509839fb23e4948545
    </Container>
     )
 }
