@@ -152,11 +152,3 @@ private doLogin() {
 
  }
 
-
-
-
-
-
-const Message = styled.div`
-
-`;

@@ -1,10 +1,10 @@
 import React, { Component, ReactInstance } from 'react';
-import { Button, Form, Modal, Table } from 'react-bootstrap';
+import { Button, Form, Modal, Table, Container, Row, Col } from 'react-bootstrap';
 import { Navigate  } from 'react-router-dom';
 import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
 import styled from 'styled-components';
 import { ApiResponse, fetch } from '../../api/api';
-// import "./Body.css";
+import "./Body.css";
 
 interface IProps {}
 
@@ -255,10 +255,13 @@ private setData(dataToSave: Data[]){
 
 
   return(
-   <Container>
-       <Filter className='bg-light' id="filter">
-            <Labela for="state">Kategorija: </Labela>
-            <Selectt id="state" name="state" aria-label="State" size="sm" onChange={(e: any) => this.selectChange(e as any)}>
+   <Container className='con-body'>
+       <div className='bg-light'>
+
+            <Form.Label htmlFor='state'>Kategorija: </Form.Label>
+            <Row className='select-width'>
+            <Form.Select id="state" className='select-form' name="state" aria-label="State"  
+            onChange={(e: any) => this.selectChange(e as any)}>
 
                 {this.state.categories.map((cat: Cat) => {
                     return(
@@ -267,22 +270,23 @@ private setData(dataToSave: Data[]){
                         </option>
                     );
                 })}
-
-            </Selectt>
-            <Butt onClick={() => this.fetchCategory()}>Filtriraj</Butt>
-            <Butt className="bg-success" onClick={() => this.setAddModalVisible(true)}>Add category</Butt> 
-            <ReactToPrint  trigger={() =><Butt className="bg-danger">
+            </Form.Select>
+            <Button variant="primary" 
+                onClick={() => this.fetchCategory()}>Filtriraj</Button>
+                 <Button variant="success" onClick={() => this.setAddModalVisible(true)}>
+                    Add category
+                    </Button> 
+            <ReactToPrint  trigger={() =><Button variant="danger">
               Printaj
-            </Butt>}
+            </Button>}
             content={() => this.state.componentRef}/>
-       </Filter>
-       <AdaptedTable variant="light" striped bordered hover ref={el => (this.state.componentRef = el)} >
+            </Row>
+       <Table responsive="sm" variant="light" striped bordered hover ref={el => (this.state.componentRef = el)} >
         <thead>
             <tr>
-                <th>Podatak id</th>
+                <th className='data-id'>Podatak id</th>
                 <th>Kreirano</th>
-                
-                <th className={(this.state.category?.value1 === null) ? 'd-none' : '' }>{this.state.category?.value1}</th>
+                <th className= {(this.state.category?.value1 === null) ? 'd-none' : '' }>{this.state.category?.value1}</th>
                 <th className={(this.state.category?.value2 === null) ? 'd-none' : '' }>{this.state.category?.value2}</th>
                 <th className={(this.state.category?.value3 === null) ? 'd-none' : '' }>{this.state.category?.value3}</th>
                 <th className={(this.state.category?.value4 === null) ? 'd-none' : '' }>{this.state.category?.value4}</th>
@@ -295,7 +299,7 @@ private setData(dataToSave: Data[]){
             {this.state.category?.data.map((data: Data) => {
                 return(
                     <tr>
-                        <td>{data.dataId}</td>
+                        <td className='data-id'>{data.dataId}</td>
                         <td>{data.createdAt}</td>
                         <td className={(data.value1 === -1000) ? 'd-none' : ''}>{data.value1}</td>
                         <td className={(data.value2 === -1000) ? 'd-none' : ''}>{data.value2}</td>
@@ -308,7 +312,7 @@ private setData(dataToSave: Data[]){
                 );
             })}
         </tbody>
-        </AdaptedTable>
+        </Table>
         <Modal size="lg" centered show={this.state.addModalVisible} onHide={() => this.setAddModalVisible(false)}>
             <Modal.Header closeButton>
                   <Modal.Title>
@@ -353,89 +357,14 @@ private setData(dataToSave: Data[]){
                       <Form.Control id="value7" type="text" ></Form.Control>
                 </Form.Group>    
                 <Form.Group>
-                    <Butt>
+                    <Button variant="primary">
                         Save
-                    </Butt>
+                    </Button>
                 </Form.Group>
             </Modal.Body>
         </Modal>
-
+</div>
    </Container>
     )
-   }
-
-
-
-
- }
-
- const Container = styled.div`
- display: block;
- float: none;
- width: 80vw;
- margin: 0 auto;
- height: calc(100vh - 200px);
- border-top: 2px solid white;
- border-bottom: 2px solid white;
-
- background-color: rgba(0, 0, 0, 0.02);
- overflow-y: hidden;
-`;
-
-const AdaptedTable = styled(Table)`
-    height: calc(100vh - 310px);
-    cursor: pointer;
-
-    tbody {
-        display: block;
-        overflow: auto;
-        height: calc(100vh - 230px);
-        border-bottom: 2px solid white;
-    }
-
-    thead, tbody tr {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
-    }
-
-
-    th {
-        text-align: center;
-    }
-
-    td {
-        text-align: center;
-    }
-
-    
-
-`
-
-const Filter = styled.div`
-    height: 80px;
-    background-color: light;
-    display: flex;
-    padding: 10px;
-    padding-top: 15px;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 2px solid white;
-
-`;
-
-const Labela = styled(Form.Label)`
-    margin-right: 10px;
-    font-size: 20px;
-`
-
-const Selectt = styled(Form.Select)`
- width: 200px;
- height 40px;
-`
-const Butt = styled(Button)`
-    margin-left: 20px;
-    margin-top: 7px;
-    height: 40px;
-
-`
+}
+}

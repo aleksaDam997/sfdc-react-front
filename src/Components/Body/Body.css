@@ -1,20 +1,7 @@
-const Container = styled.div`
-display: block;
-float: none;
-width: 80vw;
-margin: 0 auto;
-height: calc(100vh - 200px);
+.con-body{
 border-top: 2px solid white;
 border-bottom: 2px solid white;
-
-background-color: rgba(0, 0, 0, 0.02);
-overflow-y: hidden;
-`;
-
-const AdaptedTable = styled(Table)`
-   height: calc(100vh - 310px);
-   cursor: pointer;
-
+}
    tbody {
        display: block;
        overflow: auto;
@@ -23,9 +10,17 @@ const AdaptedTable = styled(Table)`
    }
 
    thead, tbody tr {
+        height: auto;
        display: table;
        width: 100%;
        table-layout: fixed;
+   }
+   tbody{
+    height: auto;
+    display:block;
+    /* overflow:scroll */
+    border-bottom: solid black 2px;
+    border-top: solid black 1px;
    }
 
 
@@ -36,35 +31,39 @@ const AdaptedTable = styled(Table)`
    td {
        text-align: center;
    }
-
-   
-
-`
-
-const Filter = styled.div`
-   height: 80px;
-   background-color: light;
-   display: flex;
-   padding: 10px;
-   padding-top: 15px;
-   justify-content: center;
-   align-items: center;
-   border-bottom: 2px solid white;
-
-`;
-
-const Labela = styled(Form.Label)`
-   margin-right: 10px;
-   font-size: 20px;
-`
-
-const Selectt = styled(Form.Select)`
-width: 200px;
-height 40px;
-`
-const Butt = styled(Button)`
-   margin-left: 20px;
-   margin-top: 7px;
-   height: 40px;
-
-`
+.btn{
+    width: auto;
+    margin-bottom: 7px;
+    max-height: 40px; 
+}
+.select-form{
+  max-width: 240px;
+  max-height: 40px;   
+}
+@media screen and (max-width: 521px) {
+    .table{
+        font-size: 11px;
+    }
+  }
+  @media screen and (max-width: 521px) {
+   th{
+    margin: 0;
+    padding: 2px;
+   }
+    .btn{
+        margin: 5px
+    }
+  }
+  @media screen and (max-width: 450px) {
+    .table{
+        font-size: 11px;
+       }
+       .data-id {
+        width: 75px;
+       }
+   }
+   @media screen and (max-width: 358px) {
+       .data-id {
+        width: 50px;
+       }
+   }
