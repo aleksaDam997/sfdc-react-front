@@ -3,7 +3,9 @@ import { Button, Form, Modal, Table } from 'react-bootstrap';
 import { Navigate  } from 'react-router-dom';
 import ReactToPrint, { PrintContextConsumer } from 'react-to-print';
 import styled from 'styled-components';
+import Chart from 'react-apexcharts'
 import { ApiResponse, fetch } from '../../api/api';
+import { ApexOptions } from 'apexcharts';
 
 interface IProps {}
 
@@ -44,15 +46,14 @@ interface Cat {
     excerpt: string;
     current: boolean;
 }
-
-
-
 interface BodyState {
     isLoggedIn: boolean;
     category?: Category;
     categories: Cat[];
     componentRef: ReactInstance | null;
     addModalVisible: boolean;
+    apexChartVisible: boolean;
+    apexOptions: ApexOptions;
 
 }
 
@@ -62,19 +63,32 @@ export class Body extends Component<IProps> {
  constructor(props: Readonly<{}>) {
      super(props);
 
+
+
      this.state = {
          isLoggedIn: true,
          categories: [],
          componentRef: null,
-         addModalVisible: false
+         addModalVisible: false,
+         apexChartVisible: false,
+         apexOptions: {
+            chart: {
+                height: 350,
+                type: 'bar',
+            },
+            dataLabels: {
+                enabled: false
+            },
+            series: [],
+            title: {
+                text: 'Ajax Example',
+            },
+            noData: {
+              text: 'Loading...'
+            }
+            }
+            
      }
- }
-//#2f34d8
-
-private setComponentRef(table: HTMLTableElement) {
-    this.setState(Object.assign(this.state, {
-        componentRef: table
-    }))
 }
 
 private setLogginState(state: boolean) {
@@ -156,7 +170,6 @@ private setData(dataToSave: Data[]){
     await this.fetchCategories();
 
     await this.fetchCategory();
-
   }
 
   private async fetchCategory(){
@@ -180,12 +193,69 @@ private setData(dataToSave: Data[]){
 
           this.setCategory(res.data);
 
+          this.setChartDetails(res.data);
+
     }).catch(err => {
         console.log(err);
     });
 
-    console.log(this.state.category);
         
+  }
+
+  private setChartDetails(cat: Category) {
+
+    let dates: number[] = [];
+    let values: number[] = [];
+
+    cat.data?.map(val => {
+
+        const date = new Date(Number(val.createdAt));
+        dates.push(date.getFullYear());
+
+        values.push(val.value1);
+    });
+
+
+  }
+
+  private setChartVisibile(state: boolean) {
+
+    this.setState(
+        Object.assign(this.state, {
+            apexChartVisible: state
+        })
+    )
+  }
+
+  private updateChart() {
+    // var chart = new ApexCharts(
+    //     document.getElementById('chart'),
+    //     this.state.apexOptions
+    //   );
+
+      var chart = new ApexCharts(
+        document.querySelector("#chart"),
+        this.state.apexOptions
+      );
+
+      chart.render();
+
+      const data1: number[] = [];
+      const data2: number[] = [];
+
+      this.state.category?.data.map(dat => {
+        data1.push(dat.value1);
+        data2.push(dat.value2);
+      })
+
+      chart.updateSeries([{
+        name: this.state.category?.value1,
+        data: data1
+      }])
+
+
+
+      
   }
 
   private async fetchCategories() {
@@ -257,7 +327,7 @@ private setData(dataToSave: Data[]){
    <Container>
        <Filter className='bg-light' id="filter">
             <Labela for="state">Kategorija: </Labela>
-            <Selectt id="state" name="state" aria-label="State" size="sm" onChange={(e: any) => this.selectChange(e as any)}>
+            <Selectt id="state" name="state" aria-label="state" size="sm" onChange={(e: any) => this.selectChange(e as any)}>
 
                 {this.state.categories.map((cat: Cat) => {
                     return(
@@ -274,6 +344,7 @@ private setData(dataToSave: Data[]){
               Printaj
             </Butt>}
             content={() => this.state.componentRef}/>
+            <Butt onClick={() => this.setChartVisibile(true)}>Graff..</Butt>
        </Filter>
        <AdaptedTable variant="light" striped bordered hover ref={el => (this.state.componentRef = el)} >
         <thead>
@@ -357,6 +428,27 @@ private setData(dataToSave: Data[]){
                     </Butt>
                 </Form.Group>
             </Modal.Body>
+        </Modal>
+        <Modal size="lg" centered show={this.state.apexChartVisible} onHide={() => this.setChartVisibile(false)}>
+            <Modal.Header closeButton>
+                  <Modal.Title>
+                   Graf..
+                  </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="d-flex justify-content-center">
+                <Chart id="chart"
+                    options={this.state.apexOptions}
+                    series={this.state.apexOptions.series}
+                    type="line"
+                    width="500"
+
+                />
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={() => this.updateChart()}>
+                    Azuriraj graf
+                </Button>
+            </Modal.Footer>
         </Modal>
 
    </Container>
